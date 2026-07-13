@@ -396,9 +396,23 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
               Alcance de la prestación:
             </Text>{' '}
             El servicio integral de instalación incluye la totalidad de los
-            materiales específicos de fijación, la mano de obra especializada,
-            el sellado hermético perimetral y la correspondiente garantía del
-            trabajo realizado.
+            materiales específicos de fijación, la mano de obra especializada y
+            la correspondiente garantía del trabajo realizado.
+          </Text>
+        </View>
+        <View style={styles.bulletItem}>
+          <Text style={styles.bulletDot}>•</Text>
+          <Text style={styles.bulletText}>
+            <Text style={{ fontWeight: 'bold' }}>
+              Sellado perimetral y terminaciones:
+            </Text>{' '}
+            El sellado hermético perimetral de las aberturas se realiza
+            estrictamente con silicona neutra y poliuretano expandido hasta un
+            máximo de 1 cm de espesor/luz. Para separaciones mayores o cualquier
+            terminación estética posterior (como trabajos de mampostería,
+            aplicación de enduido o yeso, lijado y pintura para ocultar
+            desperfectos del vano), la ejecución y los costos correrán por
+            cuenta exclusiva del cliente mediante servicios externos.
           </Text>
         </View>
         <View style={styles.bulletItem}>
