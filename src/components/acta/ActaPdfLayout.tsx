@@ -226,11 +226,27 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
   },
 
+  /* ── OBSERVACIONES RESALTADAS (NEUTRO) ── */
+  notaAlerta: {
+    backgroundColor: '#F5F5F5',
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    marginTop: 6,
+    marginBottom: 4,
+    borderRadius: 2,
+  },
+  notaAlertaTexto: {
+    fontSize: 9,
+    color: TEXT_DARK,
+    textAlign: 'justify',
+    lineHeight: 1.4,
+  },
+
   /* ── FIRMAS ── */
   firmasRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 60,
+    marginTop: 50,
   },
   firmaBox: {
     width: '42%',
@@ -391,6 +407,32 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
             <Text style={{ fontWeight: 'bold' }}>Límite de la garantía:</Text>{' '}
             La cobertura de la garantía técnica del servicio no contempla, bajo
             ningún concepto, la rotura posterior de los vidrios.
+          </Text>
+        </View>
+
+        {/* ── BLOQUES DE OBSERVACIÓN POR TERCEROS (CON WRAP FALSE PARA EVITAR CORTES) ── */}
+        <View style={styles.notaAlerta} wrap={false}>
+          <Text style={styles.notaAlertaTexto}>
+            <Text style={{ fontWeight: 'bold' }}>
+              OBSERVACIÓN - INSTALACIÓN DE PAÑO FIJO POR TERCEROS:
+            </Text>{' '}
+            La empresa NO se responsabiliza por fallas, filtraciones o una mala
+            colocación en paños fijos cuando la instalación sea realizada por un
+            tercero. Este tipo de estructura requiere un procedimiento técnico
+            complejo que involucra retirar el vidrio y volver a colocar
+            correctamente los burletes correspondientes.
+          </Text>
+        </View>
+
+        <View style={styles.notaAlerta} wrap={false}>
+          <Text style={styles.notaAlertaTexto}>
+            <Text style={{ fontWeight: 'bold' }}>
+              OBSERVACIÓN - REGULACIÓN POR TERCEROS:
+            </Text>{' '}
+            La empresa NO se responsabiliza por desajustes o la mala regulación
+            posterior de puertas (en sus bisagras) y de hojas tipo rajas si la
+            instalación, manipulación u optimización final es ejecutada por
+            personal ajeno a nuestra firma.
           </Text>
         </View>
 

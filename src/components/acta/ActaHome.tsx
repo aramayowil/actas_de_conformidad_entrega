@@ -50,7 +50,9 @@ export function ActaHome({ onNueva, onEditar }: Props) {
   function confirmarEliminacion() {
     if (!actaAEliminar) return
     eliminarActa(actaAEliminar.id)
-    toast.success(`Acta de "${actaAEliminar.cliente.nombre || 'cliente'}" eliminada.`)
+    toast.success(
+      `Acta de "${actaAEliminar.cliente.nombre || 'cliente'}" eliminada.`,
+    )
     setActaAEliminar(null)
   }
 
@@ -66,10 +68,16 @@ export function ActaHome({ onNueva, onEditar }: Props) {
               className="h-11 w-auto sm:h-14"
             />
             <div className="min-w-0">
-              <h1 className="text-lg sm:text-xl font-bold truncate" style={{ color: 'var(--text-primary)' }}>
+              <h1
+                className="text-lg sm:text-xl font-bold truncate"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 Actas de Entrega
               </h1>
-              <p className="text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>
+              <p
+                className="text-xs sm:text-sm"
+                style={{ color: 'var(--text-muted)' }}
+              >
                 Conformidad de servicio · Lebaux
               </p>
             </div>
@@ -86,7 +94,6 @@ export function ActaHome({ onNueva, onEditar }: Props) {
 
         {/* BUSCADOR */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: 'var(--text-muted)' }} />
           <Input
             placeholder="Buscar por cliente o localidad..."
             value={busqueda}
@@ -99,7 +106,10 @@ export function ActaHome({ onNueva, onEditar }: Props) {
         {/* LISTADO DE ACTAS */}
         <section className="flex-1">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>
+            <h2
+              className="text-sm font-semibold uppercase tracking-wide"
+              style={{ color: 'var(--text-muted)' }}
+            >
               Historial
             </h2>
             <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
@@ -112,11 +122,20 @@ export function ActaHome({ onNueva, onEditar }: Props) {
               <CardContent className="flex flex-col items-center justify-center py-12 gap-2 text-center">
                 {actas.length === 0 ? (
                   <>
-                    <PackageOpen className="h-10 w-10" style={{ color: 'var(--text-muted)' }} />
-                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                    <PackageOpen
+                      className="h-10 w-10"
+                      style={{ color: 'var(--text-muted)' }}
+                    />
+                    <p
+                      className="text-sm"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
                       Todavía no hay actas guardadas.
                     </p>
-                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    <p
+                      className="text-xs"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
                       Creá tu primera acta con el botón de arriba.
                     </p>
                     <Button
@@ -131,8 +150,14 @@ export function ActaHome({ onNueva, onEditar }: Props) {
                   </>
                 ) : (
                   <>
-                    <Search className="h-8 w-8" style={{ color: 'var(--text-muted)' }} />
-                    <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                    <Search
+                      className="h-8 w-8"
+                      style={{ color: 'var(--text-muted)' }}
+                    />
+                    <p
+                      className="text-sm"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
                       No se encontraron actas con esa búsqueda.
                     </p>
                   </>
@@ -154,9 +179,14 @@ export function ActaHome({ onNueva, onEditar }: Props) {
         </section>
 
         {/* FOOTER */}
-        <footer className="pt-4 text-center text-xs" style={{ color: 'var(--text-muted)' }}>
+        <footer
+          className="pt-4 text-center text-xs"
+          style={{ color: 'var(--text-muted)' }}
+        >
           <p>Lebaux Aberturas · AV Alem 1930, Tucumán Capital · 3815729129</p>
-          <p className="mt-1">Las actas se guardan localmente en tu navegador.</p>
+          <p className="mt-1">
+            Las actas se guardan localmente en tu navegador.
+          </p>
         </footer>
       </div>
 
@@ -167,8 +197,8 @@ export function ActaHome({ onNueva, onEditar }: Props) {
         description={
           <>
             Vas a eliminar el acta de{' '}
-            <strong>{actaAEliminar?.cliente.nombre || 'cliente'}</strong>. Esta acción no
-            se puede deshacer.
+            <strong>{actaAEliminar?.cliente.nombre || 'cliente'}</strong>. Esta
+            acción no se puede deshacer.
           </>
         }
         confirmLabel="Eliminar"
@@ -190,11 +220,16 @@ function ActaRow({
   onEditar: () => void
   onEliminar: () => void
 }) {
-  const totalAberturas = acta.elementos.reduce((acc, e) => acc + (e.cantidad || 0), 0)
+  const totalAberturas = acta.elementos.reduce(
+    (acc, e) => acc + (e.cantidad || 0),
+    0,
+  )
   const puedeGenerar =
     acta.cliente.nombre.trim().length > 0 &&
     acta.elementos.length > 0 &&
-    acta.elementos.every((e) => e.descripcion.trim().length > 0 && e.cantidad > 0)
+    acta.elementos.every(
+      (e) => e.descripcion.trim().length > 0 && e.cantidad > 0,
+    )
 
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -207,18 +242,26 @@ function ActaRow({
         >
           <div className="flex items-center gap-2 mb-1.5">
             <FileText className="h-4 w-4 text-amber-brand shrink-0" />
-            <h3 className="font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
+            <h3
+              className="font-semibold truncate"
+              style={{ color: 'var(--text-primary)' }}
+            >
               {acta.cliente.nombre || '(sin nombre)'}
             </h3>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs" style={{ color: 'var(--text-muted)' }}>
+          <div
+            className="flex flex-wrap gap-x-4 gap-y-1 text-xs"
+            style={{ color: 'var(--text-muted)' }}
+          >
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               {format(new Date(acta.fecha), 'dd/MM/yyyy')}
             </span>
             <span className="flex items-center gap-1">
               <User className="h-3 w-3" />
-              <span className="truncate max-w-[140px]">{acta.cliente.localidad || '—'}</span>
+              <span className="truncate max-w-[140px]">
+                {acta.cliente.localidad || '—'}
+              </span>
             </span>
             <span className="flex items-center gap-1">
               <PackageOpen className="h-3 w-3" />
