@@ -2,7 +2,7 @@
  * components/acta/ActaPdfLayout.tsx
  *
  * PDF del Acta de Entrega y Conformidad de Servicio.
- * Diseño calcado del archivo "Acta_de_Entrega_Gonzalo.pdf".
+ * Rediseñado con la paleta corporativa y disposición de firmas ampliada.
  */
 import {
   Document,
@@ -14,15 +14,14 @@ import {
 } from '@react-pdf/renderer'
 import type { Acta } from '@/types/acta'
 
-/* ── Paleta ── */
-const BRAND = '#B07A2C'
-const BRAND_DARK = '#8A5A18'
-const TEXT_DARK = '#1F1F1F'
-const TEXT_MUTED = '#555555'
-const BORDER = '#D9D9D9'
-const ROW_ALT = '#FAF7F2'
-const TABLE_HEADER_BG = '#E8DBC4'
-const SECTION_BG = '#3D3D3D'
+/* ── Paleta de Colores Corporativa Unificada (Ajustada al Logo) ── */
+const BRAND = '#E5933A' // Naranja fiel al espíritu del logo, con el contraste técnico justo para líneas y badges
+const TEXT_DARK = '#2A2C2E' // Gris carbón industrial (derivado de tus letras, evita el negro duro y tosco)
+const TEXT_MUTED = '#686B6D' // Gris medio idéntico al de la tipografía "LEBAUX" para datos secundarios
+const BORDER = '#DCE0E2' // Gris claro para líneas divisorias limpias
+const ROW_ALT = '#FDF9F3' // Fondo alterno de filas, un crema cálido y sutil
+const TABLE_HEADER_BG = '#F4EFE6' // Fondo de la cabecera de tabla, armonizado con el ícono del logo
+const SECTION_BG = '#4A4D4F'
 
 /* ── Helpers ── */
 const MESES = [
@@ -57,58 +56,65 @@ function pluralizar(n: number, singular: string, plural: string) {
   return n === 1 ? singular : plural
 }
 
-/* ── Estilos ── */
+/* ── Estilos Corregidos y Optimizados ── */
 const styles = StyleSheet.create({
   page: {
     fontFamily: 'Helvetica',
     color: TEXT_DARK,
-    padding: 36,
+    padding: 30,
     fontSize: 9.5,
     lineHeight: 1.4,
   },
 
-  /* ── HEADER ── */
+  /* ── HEADER AJUSTADO Y EQUILIBRADO ── */
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingBottom: 12,
-    borderBottomWidth: 1.5,
+    alignItems: 'flex-start', // Ubica los elementos al tope superior
+    paddingBottom: 14,
+    borderBottomWidth: 2,
     borderBottomColor: BRAND,
+    marginBottom: 15,
+  },
+  headerLeft: {
+    width: '40%',
+    justifyContent: 'center',
+  },
+  headerRight: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: '60%',
+    gap: 1,
   },
   headerLogo: {
-    height: 56,
-    width: 130,
+    width: 170,
+    height: 42,
     objectFit: 'contain',
-    objectPosition: 'left center',
-  },
-  headerEmpresaDato: {
-    fontSize: 8,
-    color: TEXT_MUTED,
-    marginTop: 2,
   },
   headerTitulo: {
-    fontSize: 14,
+    fontSize: 19,
     fontWeight: 'bold',
-    color: TEXT_DARK,
+    color: BRAND,
     textAlign: 'right',
-    letterSpacing: 0.3,
+    letterSpacing: 0.5,
+    marginBottom: 15,
+    textTransform: 'uppercase',
   },
-  headerSubtitulo: {
-    fontSize: 8,
-    fontWeight: 'bold',
-    color: BRAND_DARK,
+  headerEmpresaDato: {
+    fontSize: 10,
+    color: TEXT_MUTED,
     textAlign: 'right',
-    letterSpacing: 0.6,
-    marginTop: 3,
+    marginTop: 0,
   },
 
   /* ── BLOQUE DE DATOS ── */
   datosGrid: {
-    marginTop: 14,
+    marginTop: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 6,
+    paddingHorizontal: 8,
+    marginBottom: 10,
   },
   datoFila: {
     flexDirection: 'row',
@@ -145,6 +151,7 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     marginBottom: 6,
     lineHeight: 1.45,
+    paddingHorizontal: 8,
   },
 
   /* ── TABLA ELEMENTOS ── */
@@ -153,11 +160,12 @@ const styles = StyleSheet.create({
     backgroundColor: TABLE_HEADER_BG,
     paddingVertical: 6,
     paddingHorizontal: 8,
-    fontSize: 8.5,
+    fontSize: 9,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     color: TEXT_DARK,
-    borderRadius: 2,
+    borderBottomWidth: 1.5,
+    borderBottomColor: BRAND,
   },
   tablaRow: {
     flexDirection: 'row',
@@ -165,7 +173,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderBottomWidth: 0.5,
     borderBottomColor: BORDER,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   tablaRowAlt: {
     backgroundColor: ROW_ALT,
@@ -177,45 +185,48 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   colDescripcion: { flex: 1, paddingHorizontal: 8, fontSize: 9.5 },
-  colEstado: { width: 110, textAlign: 'center', fontSize: 9 },
+  colEstado: { width: 120, textAlign: 'right', fontSize: 9 },
   estadoBadge: {
     fontSize: 8,
     fontWeight: 'bold',
-    color: BRAND_DARK,
-    borderWidth: 0.75,
-    borderColor: BRAND_DARK,
+    color: BRAND,
+    borderWidth: 1,
+    borderColor: BRAND,
     borderRadius: 3,
-    paddingHorizontal: 5,
+    paddingHorizontal: 6,
     paddingVertical: 2,
-    alignSelf: 'center',
+    textAlign: 'center',
   },
 
-  /* ── CONDICIONES ── */
+  /* ── CONDICIONES Y ALERTAS ── */
   notaDestacada: {
     fontSize: 9.5,
     fontWeight: 'bold',
     color: TEXT_DARK,
     backgroundColor: '#FFF4E0',
     borderLeftWidth: 3,
-    borderLeftColor: BRAND_DARK,
+    borderLeftColor: BRAND,
     paddingHorizontal: 8,
     paddingVertical: 6,
     marginBottom: 8,
+    marginHorizontal: 8,
   },
   condicionesIntro: {
     fontSize: 9.5,
     color: TEXT_DARK,
     textAlign: 'justify',
     marginBottom: 6,
+    paddingHorizontal: 8,
   },
   bulletItem: {
     flexDirection: 'row',
     marginBottom: 4,
+    paddingHorizontal: 8,
   },
   bulletDot: {
     width: 12,
     fontSize: 9.5,
-    color: BRAND_DARK,
+    color: BRAND,
     fontWeight: 'bold',
   },
   bulletText: {
@@ -225,8 +236,6 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     lineHeight: 1.4,
   },
-
-  /* ── OBSERVACIONES RESALTADAS (NEUTRO) ── */
   notaAlerta: {
     backgroundColor: '#F5F5F5',
     paddingHorizontal: 10,
@@ -234,6 +243,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginBottom: 4,
     borderRadius: 2,
+    marginHorizontal: 8,
   },
   notaAlertaTexto: {
     fontSize: 9,
@@ -242,33 +252,34 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
   },
 
-  /* ── FIRMAS ── */
+  /* ── SECCIÓN DE FIRMAS EXPANDIDA ── */
   firmasRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 50,
+    marginTop: 130,
+    paddingHorizontal: 20,
   },
   firmaBox: {
     width: '42%',
     borderTopWidth: 1,
     borderTopColor: TEXT_DARK,
-    paddingTop: 4,
+    paddingTop: 6,
     alignItems: 'center',
   },
-  firmaNombre: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: TEXT_DARK,
-    marginBottom: 2,
-  },
   firmaRol: {
-    fontSize: 8,
+    fontSize: 8.5,
     color: TEXT_MUTED,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 })
 
-/* ── Sub-componentes ── */
-function DatoLinea({ label, valor }: { label: string; valor?: string }) {
+interface DatoLineaProps {
+  label: string
+  valor?: string
+}
+
+function DatoLinea({ label, valor }: DatoLineaProps) {
   return (
     <View style={styles.datoFila}>
       <Text style={styles.datoLabel}>{label}:</Text>
@@ -277,7 +288,6 @@ function DatoLinea({ label, valor }: { label: string; valor?: string }) {
   )
 }
 
-/* ── Documento ── */
 export function ActaPdfLayout({ acta }: { acta: Acta }) {
   const cantidadTotal = totalAberturas(acta)
   const nombreCliente = acta.cliente.nombre || '_______________'
@@ -286,22 +296,21 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* ── HEADER ── */}
+        {/* ── HEADER REESTRUCTURADO ── */}
         <View style={styles.header}>
-          <View>
+          {/* Columna Izquierda: Logo (Ubicado arriba a la izquierda) */}
+          <View style={styles.headerLeft}>
             <Image src="/logo_lebaux.png" style={styles.headerLogo} />
-            <Text style={styles.headerEmpresaDato}>
-              AV Alem 1930, Tucumán Capital
-            </Text>
-            <Text style={styles.headerEmpresaDato}>
-              3815729129 · lebauxaberturas1930@gmail.com
-            </Text>
           </View>
-          <View>
-            <Text style={styles.headerTitulo}>LEBAUX ABERTURAS</Text>
-            <Text style={styles.headerSubtitulo}>
-              ACTA DE ENTREGA Y CONFORMIDAD DE SERVICIO
+
+          {/* Columna Derecha: Título en Grande y Datos de Contacto */}
+          <View style={styles.headerRight}>
+            <Text style={styles.headerTitulo}>Acta de Entrega</Text>
+            <Text style={styles.headerEmpresaDato}>LEBAUX SRL</Text>
+            <Text style={styles.headerEmpresaDato}>
+              Av. Alem 1930 - San Miguel de Tucumán
             </Text>
+            <Text style={styles.headerEmpresaDato}>Tel: (381) 572-9129</Text>
           </View>
         </View>
 
@@ -403,16 +412,12 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
         <View style={styles.bulletItem}>
           <Text style={styles.bulletDot}>•</Text>
           <Text style={styles.bulletText}>
-            <Text style={{ fontWeight: 'bold' }}>
-              Sellado perimetral y terminaciones:
-            </Text>{' '}
-            El sellado hermético perimetral de las aberturas se realiza
-            estrictamente con silicona neutra y poliuretano expandido hasta un
-            máximo de 1 cm de espesor/luz. Para separaciones mayores o cualquier
-            terminación estética posterior (como trabajos de mampostería,
-            aplicación de enduido o yeso, lijado y pintura para ocultar
-            desperfectos del vano), la ejecución y los costos correrán por
-            cuenta exclusiva del cliente mediante servicios externos.
+            <Text style={{ fontWeight: 'bold' }}>Sellado perimetral:</Text> El
+            sellado hermético perimetral se realiza estrictamente con silicona
+            neutra y poliuretano expandido hasta un máximo de 1 cm de
+            espesor/luz. Cualquier terminación estética posterior (como
+            mampostería, yeso o pintura), correrá por cuenta exclusiva del
+            cliente mediante servicios externos.
           </Text>
         </View>
         <View style={styles.bulletItem}>
@@ -420,11 +425,11 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
           <Text style={styles.bulletText}>
             <Text style={{ fontWeight: 'bold' }}>Límite de la garantía:</Text>{' '}
             La cobertura de la garantía técnica del servicio no contempla, bajo
-            ningún concepto, la rotura posterior de los vidrios.
+            núngun concepto, la rotura posterior de los vidrios.
           </Text>
         </View>
 
-        {/* ── BLOQUES DE OBSERVACIÓN POR TERCEROS (CON WRAP FALSE PARA EVITAR CORTES) ── */}
+        {/* ── BLOQUES DE OBSERVACIÓN ── */}
         <View style={styles.notaAlerta} wrap={false}>
           <Text style={styles.notaAlertaTexto}>
             <Text style={{ fontWeight: 'bold' }}>
@@ -432,9 +437,7 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
             </Text>{' '}
             La empresa NO se responsabiliza por fallas, filtraciones o una mala
             colocación en paños fijos cuando la instalación sea realizada por un
-            tercero. Este tipo de estructura requiere un procedimiento técnico
-            complejo que involucra retirar el vidrio y volver a colocar
-            correctamente los burletes correspondientes.
+            tercero.
           </Text>
         </View>
 
@@ -444,13 +447,12 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
               OBSERVACIÓN - REGULACIÓN POR TERCEROS:
             </Text>{' '}
             La empresa NO se responsabiliza por desajustes o la mala regulación
-            posterior de puertas (en sus bisagras) y de hojas tipo rajas si la
-            instalación, manipulación u optimización final es ejecutada por
-            personal ajeno a nuestra firma.
+            posterior de puertas y hojas si la instalación o manipulación es
+            ejecutada por personal ajeno a nuestra firma.
           </Text>
         </View>
 
-        {/* ── FIRMAS ── */}
+        {/* ── ESPACIO DE FIRMAS CON MARGEN AMPLIADO ── */}
         <View style={styles.firmasRow} wrap={false}>
           <View style={styles.firmaBox}>
             <Text style={styles.firmaRol}>D.N.I. / Firma del Receptor</Text>
