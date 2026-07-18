@@ -370,7 +370,7 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
           IMPORTANTE: NO NOS HACEMOS CARGO DE VANOS EN FALSA ESCUADRA.
         </Text>
         <Text style={styles.condicionesIntro}>
-          Las especificaciones relativas a la instalación y al alcance de las
+          Las especificaciones sobre la instalación y el alcance de las
           responsabilidades técnicas contratadas se rigen bajo las siguientes
           cláusulas operativas:
         </Text>
