@@ -433,11 +433,16 @@ export function ActaPdfLayout({ acta }: { acta: Acta }) {
         <View style={styles.notaAlerta} wrap={false}>
           <Text style={styles.notaAlertaTexto}>
             <Text style={{ fontWeight: 'bold' }}>
-              OBSERVACIÓN - INSTALACIÓN DE PAÑO FIJO POR TERCEROS:
+              OBSERVACIÓN - INSTALACIÓN DE PAÑOS FIJOS:
             </Text>{' '}
-            La empresa NO se responsabiliza por fallas, filtraciones o una mala
-            colocación en paños fijos cuando la instalación sea realizada por un
-            tercero.
+            La empresa no se responsabiliza por paños fijos instalados por
+            terceros o personal ajeno a la empresa, quedando excluida la
+            cobertura ante roturas de vidrio, filtraciones o fallas de sellado.
+            La colocación de estas aberturas exige personal calificado ya que,
+            al ser la región del NOA una zona propensa a movimientos sísmicos y
+            de suelo, resulta imperativo el correcto emplazamiento de los
+            zócalos para prevenir tensiones que comprometan la integridad del
+            cristal.
           </Text>
         </View>
 
